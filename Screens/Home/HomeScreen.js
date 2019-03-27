@@ -1,6 +1,6 @@
 import React from "react";
 import { GetArticles } from "../../Services/ArticlesApiService";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Header } from "react-native";
 import { Image } from "react-native-elements";
 
 export default class HomeScreen extends React.Component {
@@ -43,8 +43,7 @@ export default class HomeScreen extends React.Component {
           style={{ width: 100, height: 100 }}
           source={{ uri: article.image }}
         />
-        <Text>{article.category}</Text>
-        <Text>{article.title}</Text>
+        <Header>{article.title}</Header>
         <Text>{article.content}</Text>
       </View>
     );
