@@ -7,9 +7,4 @@ export const GetArticles = async () => {
   let response = await axios.get(url + "/api/v1/articles");
   const articles = response.data.articles;
   return articles
-
-  try {
-  } catch (error) {
-    console.error(error);
-  }
 }; 
