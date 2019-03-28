@@ -43,10 +43,10 @@ export default class HomeScreen extends React.Component {
           style={{ width: 100, height: 100 }}
           source={{ uri: article.image }}
         />
-        <Header>{article.title}</Header>
+        <Text style={{fontSize: 20}}>{article.title}</Text>
         <Text>{article.content}</Text>
       </View>
-    );
+    ); 
   }
 }
 
