@@ -1,26 +1,35 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { GetArticle } from "../../Services/ArticlesApiService";
+import { Text, View, Image } from "react-native";
 
 export default class ArticleScreen extends React.Component {
-  renderArticles({ item }) {
-    const article = item;
-    return (
-      <View>
-        <Image
-          style={{ width: 100, height: 100 }}
-          source={{ uri: article.image }}
-        />
-        <Text>{article.category.name}</Text>
-        <Text>{article.title}</Text>
-        <Text>{article.description}</Text>
-        <Button
-          title="View Article"
-          onPress={() => this.showArticle()}
-        />
-      </View>
-    );
+
+  componentDidMount() {
+    const articleId = this.props.navigation.state.params.id
+    GetArticle(articleId).then(res => {
+      this.updateArticleStateHandler(res);
+    });
   }
-  showArticle() {
-    this.props.navigation.navigate("Article");
+
+  updateArticleStateHandler(article) {
+    this.setState({
+      article: article
+    });
   }
+
+  render() {
+      return (
+        <View>
+          <Image
+            style={{ width: 100, height: 100 }}
+            source={{ uri: article.image }}
+          />
+          <Text>{this.article.category.name}</Text>
+          <Text>{this.article.title}</Text>
+          <Text>{this.article.content}</Text>
+        </View>
+      );
+    }
+  }
+
 }
