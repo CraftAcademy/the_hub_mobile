@@ -23,16 +23,10 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.articles}
-          renderItem={this.renderArticles.bind(this)}
-          keyExtractor={item => item.id.toString()}
-        />
-      </View>
-    );
+  showArticle(id) {
+    this.props.navigation.navigate("Article", {
+      articleId: id
+    });
   }
 
   renderArticles({ item }) {
@@ -48,8 +42,17 @@ export default class HomeScreen extends React.Component {
       </View>
     ); 
   }
-  showArticle(articleId) {
-    this.props.navigation.navigate("Article", {id: articleId});
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.articles}
+          renderItem={this.renderArticles.bind(this)}
+          keyExtractor={item => item.id.toString()}
+        />
+      </View>
+    );
   }
 }
 
