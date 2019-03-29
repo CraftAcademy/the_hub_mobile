@@ -1,6 +1,6 @@
 import React from "react";
 import { GetArticles } from "../../Services/ArticlesApiService";
-import { StyleSheet, Text, View, FlatList, Header } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Image } from "react-native-elements";
 
 export default class HomeScreen extends React.Component {
@@ -23,16 +23,10 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.articles}
-          renderItem={this.renderArticles.bind(this)}
-          keyExtractor={item => item.id.toString()}
-        />
-      </View>
-    );
+  showArticle(id) {
+    this.props.navigation.navigate("Article", {
+      articleId: id
+    });
   }
 
   renderArticles({ item }) {
@@ -43,8 +37,20 @@ export default class HomeScreen extends React.Component {
           style={{ width: 100, height: 100 }}
           source={{ uri: article.image }}
         />
-        <Header>{article.title}</Header>
+        <Text style={{fontSize: 20}} onPress={() => this.showArticle(article.id)}>{article.title}</Text>
         <Text>{article.content}</Text>
+      </View>
+    ); 
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.articles}
+          renderItem={this.renderArticles.bind(this)}
+          keyExtractor={item => item.id.toString()}
+        />
       </View>
     );
   }
